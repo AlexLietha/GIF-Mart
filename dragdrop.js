@@ -23,12 +23,13 @@ cart.addEventListener("drop", event => {
 		copy.className = "shoppingCartGifCopy";
 		copy.draggable = false;
 
+		copy.style.transform = `rotate(${Math.random() * 15}deg)`;
 		copy.style.left = `${Math.random() * 100 + 50}px`;
-		copy.style.top = `${Math.random() * 100}px`;
+		copy.style.top = `${Math.random() * 75 + 25}px`;
 
 		cart.appendChild(copy);
 
-		AppendToPanel(src);
+		AppendToPanel(src, copy);
 		
 
 		for(let i = 0; i < list.length; i++) 

@@ -13,7 +13,9 @@ document.getElementById("closePanel").addEventListener("click", () => {
 	ClosePanel();
 });
 document.getElementById("backdrop").addEventListener("click", () => {
-	ClosePanel();
+	if (event.target === event.currentTarget) {
+		ClosePanel();
+	}
 });
 document.addEventListener("keydown", (event) => {
 	if (event.key === "Escape") {
@@ -28,7 +30,7 @@ function ClosePanel() {
 
 
 
-function AppendToPanel(src) {
+function AppendToPanel(src, original) {
 	const item = document.createElement("div");
 	item.className = "cartItem";
 
@@ -38,20 +40,20 @@ function AppendToPanel(src) {
 	copy.draggable = false;
 
 	const removeButton = document.createElement("button");
-	removeButton.type = "button";
 	removeButton.className = "removeCartItem";
 	removeButton.innerHTML = "🗑";
-	removeButton.setAttribute("aria-label", "Remove GIF from cart");
 
-	removeButton.addEventListener("click", () => item.remove());
 	
 	removeButton.addEventListener("click", () => {
 		item.remove();
+		original.remove();
 
 		const index = list.indexOf(src);
-		if (index !== -1) {
+		if(index !== -1) {
 			list.splice(index, 1);
 		}
+
+
 	});	
 
 	item.append(copy, removeButton);
