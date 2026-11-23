@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<header class="topnav">
+	<header class="header">
 	  <h1>GIF Mart</h1>
 
 	  <form class="search" role="search" onsubmit="Search(event)">
@@ -19,32 +19,72 @@
 	  </form>
 	</header>
 
-
 	<div id="window">
-
-		<embed src="https://c.tenor.com/Pd9ZjHO2vkYAAAAd/tenor.gif">
-		<embed src="https://c.tenor.com/AsO2siHj2t0AAAAC/tenor.gif">
-		<embed src="https://c.tenor.com/AsO2siHj2t0AAAAC/tenor.gif">
-		<embed src="https://c.tenor.com/Pd9ZjHO2vkYAAAAd/tenor.gif">
-		<embed src="https://c.tenor.com/Pd9ZjHO2vkYAAAAd/tenor.gif">
-		<embed src="https://c.tenor.com/Pd9ZjHO2vkYAAAAd/tenor.gif">
-		<embed src="https://c.tenor.com/Pd9ZjHO2vkYAAAAd/tenor.gif">
-		<embed src="https://c.tenor.com/AsO2siHj2t0AAAAC/tenor.gif">
-		<embed src="https://c.tenor.com/AsO2siHj2t0AAAAC/tenor.gif">
-		<embed src="https://c.tenor.com/AsO2siHj2t0AAAAC/tenor.gif">
-
-
-
+	  <div class="card">
+	    <img src="https://c.tenor.com/Pd9ZjHO2vkYAAAAd/tenor.gif">
+	  </div>
+	  <div class="card">
+	    <img src="https://c.tenor.com/AsO2siHj2t0AAAAC/tenor.gif">
+	  </div>
 	</div>
+	
+
 
 
 
 	<script>
-		function Search(event) {
+		async function Searchbar(event) {
 			event.preventDefault();
-			var query = document.querySelector("#gif-search").value.trim();
-			alert(query);
+			var request = document.querySelector("#gif-search").value.trim();
+			await Search(request);
 		}
+
+		async function Search(src) {
+			ClearAllGifs();
+
+			var urls = await Query(src);
+			for(let i = 0; i < urls.length; i++) {
+				CreateGif(urls[i])
+			}
+		}
+
+		async function Query(src) {
+			const apiKey = process.env.API_KEY;
+			
+			const params = new URLSearchParams({
+				api_key: apiKey,
+				q: src,
+				limit: "10",
+				rating: "g",
+			});
+
+			const apiUrl = `https://api.giphy.com/v1/gifs/search?${params}`;
+			const response = await fetch(apiUrl);
+			var json = await response.json();
+
+			return json.data.map(gif => gif.images.original.url);
+
+		}
+
+		function CreateGif(src) {
+			const card = document.createElement("div");
+			card.className = "card";
+
+			const gif = document.createElement("img");
+			gif.src = src;
+
+			card.appendChild(gif);
+			document.getElementById("window").appendChild(card);
+		}
+		function ClearAllGifs() {
+			const myNode = document.getElementById("window");
+			while(myNode.firstChild) {
+				myNode.removeChild(myNode.lastChild);
+			}
+		}
+
+
+
 
 	</script>
 
