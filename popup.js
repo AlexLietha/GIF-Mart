@@ -10,9 +10,21 @@ cart.addEventListener("click", () => {
 
 
 document.getElementById("closePanel").addEventListener("click", () => {
+	ClosePanel();
+});
+document.getElementById("backdrop").addEventListener("click", () => {
+	ClosePanel();
+});
+document.addEventListener("keydown", (event) => {
+	if (event.key === "Escape") {
+		ClosePanel();
+	}
+});
+
+function ClosePanel() {
 	panel.hidden = true;
 	backdrop.hidden = panel.hidden		
-});
+}
 
 
 
@@ -32,8 +44,26 @@ function AppendToPanel(src) {
 	removeButton.setAttribute("aria-label", "Remove GIF from cart");
 
 	removeButton.addEventListener("click", () => item.remove());
+	
+	removeButton.addEventListener("click", () => {
+		item.remove();
+
+		const index = list.indexOf(src);
+		if (index !== -1) {
+			list.splice(index, 1);
+		}
+	});	
 
 	item.append(copy, removeButton);
 	document.getElementById("cartItems").appendChild(item);
 
 }
+
+
+
+var checkout = document.getElementById("checkout");
+checkout.addEventListener("click", () => {
+	alert(list);
+});
+
+
