@@ -12,7 +12,7 @@
 	<header class="header">
 	  <h1>GIF Mart</h1>
 
-	  <form class="search" role="search" onsubmit="Search(event)">
+	  <form class="search" role="search" onsubmit="Searchbar(event)">
 	    <!-- <label class="visually-hidden" for="gif-search">Search GIFs</label> -->
 	    <input id="gif-search" name="q" type="search" placeholder="Search GIFs">
 	    <button type="submit">Search</button>
@@ -31,7 +31,7 @@
 
 
 
-
+	<script src="env"></script>
 	<script>
 		async function Searchbar(event) {
 			event.preventDefault();
@@ -40,21 +40,20 @@
 		}
 
 		async function Search(src) {
+			// alert(src);
 			ClearAllGifs();
 
 			var urls = await Query(src);
 			for(let i = 0; i < urls.length; i++) {
-				CreateGif(urls[i])
+				CreateGif(urls[i]);
 			}
 		}
 
 		async function Query(src) {
-			const apiKey = process.env.API_KEY;
-			
 			const params = new URLSearchParams({
-				api_key: apiKey,
+				api_key: GIPHY_API_KEY,
 				q: src,
-				limit: "10",
+				limit: "30",
 				rating: "g",
 			});
 
@@ -63,7 +62,7 @@
 			var json = await response.json();
 
 			return json.data.map(gif => gif.images.original.url);
-
+			// return [];
 		}
 
 		function CreateGif(src) {
@@ -82,6 +81,7 @@
 				myNode.removeChild(myNode.lastChild);
 			}
 		}
+
 
 
 
