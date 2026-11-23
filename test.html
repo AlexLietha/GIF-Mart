@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>GIF Mart - Lets go shopping!</title>
+	<link rel="stylesheet" href="style.css">
+	
+</head>
+<body>
+
+	<header class="topnav">
+	  <h1>GIF Mart</h1>
+
+	  <form class="search" role="search" onsubmit="Search(event)">
+	    <!-- <label class="visually-hidden" for="gif-search">Search GIFs</label> -->
+	    <input id="gif-search" name="q" type="search" placeholder="Search GIFs">
+	    <button type="submit">Search</button>
+	  </form>
+	</header>
+
+
+	<div id="window">
+
+		<embed src="https://c.tenor.com/Pd9ZjHO2vkYAAAAd/tenor.gif">
+		<embed src="https://c.tenor.com/AsO2siHj2t0AAAAC/tenor.gif">
+		<embed src="https://c.tenor.com/AsO2siHj2t0AAAAC/tenor.gif">
+		<embed src="https://c.tenor.com/Pd9ZjHO2vkYAAAAd/tenor.gif">
+		<embed src="https://c.tenor.com/Pd9ZjHO2vkYAAAAd/tenor.gif">
+		<embed src="https://c.tenor.com/Pd9ZjHO2vkYAAAAd/tenor.gif">
+		<embed src="https://c.tenor.com/Pd9ZjHO2vkYAAAAd/tenor.gif">
+		<embed src="https://c.tenor.com/AsO2siHj2t0AAAAC/tenor.gif">
+		<embed src="https://c.tenor.com/AsO2siHj2t0AAAAC/tenor.gif">
+		<embed src="https://c.tenor.com/AsO2siHj2t0AAAAC/tenor.gif">
+
+
+
+	</div>
+
+
+
+	<script>
+		function Search(event) {
+			event.preventDefault();
+			var query = document.querySelector("#gif-search").value.trim();
+			alert(query);
+		}
+
+	</script>
+
+
+</body>
+</html>
