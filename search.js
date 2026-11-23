@@ -42,7 +42,9 @@ function CreateGif(src) {
 	document.getElementById("window").appendChild(card);
 
 	card.draggable = true;
-	gif.draggable = true;
+	card.addEventListener("dragstart", event => {
+		event.dataTransfer.setData("text/plain", src);
+	});
 }
 function ClearAllGifs() {
 	const myNode = document.getElementById("window");

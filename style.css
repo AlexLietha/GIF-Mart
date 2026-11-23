@@ -49,18 +49,19 @@ header {
   height: 100%;
 }
 
-
-#shoppingCart > img {
-	/*position: absolute;*/
-
-	max-width: 200px;
-	max-height: 200px;
+#shoppingCart {
+  position: fixed;
   width: 200px;
   height: 200px;
-
-  position: fixed;
   bottom: 16px;
   left: 50%;
-  /*transform: translateX(-50%);*/
-  transform: translateX(-100px);
+  transform: translateX(-50%);
+}
+
+#shoppingCart img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
 }

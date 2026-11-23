@@ -1,14 +1,19 @@
 
-function dragstartHandler(ev) {
-  ev.dataTransfer.setData("text", ev.target.id);
-}
+const list = [];
 
-function dragoverHandler(ev) {
-  ev.preventDefault();
-}
+const cart = document.getElementById("shoppingCart");
 
-function dropHandler(ev) {
-  ev.preventDefault();
-  const data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
-}
+cart.addEventListener("dragover", event => {
+  event.preventDefault();
+});
+
+cart.addEventListener("drop", event => {
+	event.preventDefault();
+	const src = event.dataTransfer.getData("text/plain");
+	if(src) {
+		list[list.length] = (src);
+
+		for(let i = 0; i < list.length; i++) 
+			console.log(list[i]);
+	}
+});
