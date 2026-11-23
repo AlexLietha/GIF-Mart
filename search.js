@@ -31,6 +31,9 @@ async function Query(src) {
 	// return [];
 }
 
+
+
+let draggedCard = null;
 function CreateGif(src) {
 	const card = document.createElement("div");
 	card.className = "card";
@@ -44,7 +47,12 @@ function CreateGif(src) {
 	card.draggable = true;
 	card.addEventListener("dragstart", event => {
 		event.dataTransfer.setData("text/plain", src);
+    	draggedCard = card;
 	});
+	card.addEventListener("dragend", () => {
+		draggedCard = null;
+	});
+	
 }
 function ClearAllGifs() {
 	const myNode = document.getElementById("window");

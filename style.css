@@ -21,21 +21,30 @@ header {
 }
 
 
-
 #window {
-	background-color: rgb(50, 0, 0);
-  width: 100%;
+	width: 100%;
   height: 100vh;
 
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(2, 300px);
+  grid-auto-columns: 300px;
+  gap: 10px;
+
+  /*height: 820px;       /* two 400px rows + 10px gap */*/
   overflow-x: auto;
   overflow-y: hidden;
+
+  background-image: url("Shopping Cart/background.png");
+  background-repeat: repeat-x;
+	background-size: auto 100%;
+	background-position: 0 0;
 }
 
 #window > .card {
-  display: block;
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
+  margin: 0;
   margin: 10px;
   background: #cab;
   flex: 0 0 auto;
@@ -50,18 +59,97 @@ header {
 }
 
 #shoppingCart {
-  position: fixed;
-  width: 200px;
-  height: 200px;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
+	position: fixed;
+	width: 200px;
+	height: 200px;
+	bottom: 16px;
+	left: 50%;
+	transform: translateX(-50%);  
+	z-index: 1000;
 }
 
 #shoppingCart img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  pointer-events: none;
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	/*pointer-events: none;*/
+	z-index: -1;
+}
+
+#shoppingCart img.shoppingCartGifCopy {
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	object-fit: cover;
+	/*z-index: 1;*/
+}
+
+
+#shoppingCart.bouncing {
+  animation: cart-bounce 0.1s ease-in-out infinite alternate;
+}
+
+@keyframes cart-bounce {  
+	from { transform: translateX(-100px) translateY(0); }
+	to   { transform: translateX(-100px) translateY(-5px); }
+}
+
+
+
+
+
+
+#cartPanel {
+  position: fixed;
+  left:50%;
+  top:50%;  
+  transform: translate(-50%, -50%);
+
+  z-index: 2000;
+  width: 400px;
+  max-height: 60vh;
+  overflow: auto;
+  padding: 16px;
+  background: white;
+  border: 1px solid #888;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px #0004;
+  z-index: 2000;
+}
+
+#cartPanel[hidden] {
+  display: none;
+}
+
+#backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgb(10,10,10, 75%);
+  z-index: 1999;
+}
+
+#cartPanel .shoppingCartGifCopy {
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
+  flex: 0 0 auto;
+	/*display: block;*/
+}
+
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shoppingCartGifCopy {
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.removeCartItem {
+  cursor: pointer;
 }
